@@ -1,8 +1,9 @@
 import { useState } from "react";
+import { Facebook, Instagram, Music, Youtube } from "lucide-react";
 
 const ContactSection = () => {
   const [formData, setFormData] = useState({
-    nombre: "", apellido: "", telefono: "", email: "", clase: "", experiencia: "Soy completamente nuevo", mensaje: "",
+    nombre: "", apellido: "", telefono: "", email: "", mensaje: "",
   });
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -24,9 +25,17 @@ const ContactSection = () => {
 
           <div className="mb-[50px]">
             {[
-              { label: "Dirección", value: "Av. Insurgentes 1450, Col. Centro\nMonterrey, N.L. 64000" },
-              { label: "Horarios", value: "Lun–Vie: 7:00am – 10:00pm\nSáb: 8:00am – 2:00pm" },
-              { label: "Teléfono", value: "+52 (81) 1234-5678" },
+              {
+                label: "Dirección",
+                value:
+                  "Av. Eugenio Garza Sada Sur 2622, Tecnológico, 64700 Monterrey, N.L, Monterrey, Mexico, 64700",
+              },
+              {
+                label: "Horarios",
+                value:
+                  "Lun–Vie: Chava 6:00am – 8:00am\nLun–Vie: Chava 4:00pm – 7:00pm\nLun–Vie: Hugo 7:00pm – 10:00pm\nSáb: Hugo 10:00am – 1:00pm",
+              },
+              { label: "Teléfono", value: "+52 81 8083 6450" },
               { label: "Email", value: "info@cornerboxing.mx" },
             ].map((item) => (
               <div key={item.label} className="py-6 border-b border-dim/30">
@@ -36,16 +45,38 @@ const ContactSection = () => {
             ))}
           </div>
 
+          <div className="font-display font-semibold text-[0.7rem] tracking-[0.3em] uppercase text-electric mb-3">
+            Síguenos en nuestras redes
+          </div>
           <div className="flex gap-4">
-            {["IG", "FB", "YT", "TK"].map((s) => (
-              <a
-                key={s}
-                href="#"
-                className="w-11 h-11 bg-secondary border border-primary/20 flex items-center justify-center no-underline text-grey font-display font-bold text-[0.7rem] tracking-wider clip-skew-sm hover:bg-electric hover:text-foreground hover:border-electric transition-all"
-              >
-                {s}
-              </a>
-            ))}
+            <a
+              href="#"
+              className="w-11 h-11 bg-secondary border border-primary/20 flex items-center justify-center no-underline text-grey clip-skew-sm hover:bg-electric hover:text-foreground hover:border-electric transition-all"
+              aria-label="Instagram"
+            >
+              <Instagram className="h-5 w-5" />
+            </a>
+            <a
+              href="#"
+              className="w-11 h-11 bg-secondary border border-primary/20 flex items-center justify-center no-underline text-grey clip-skew-sm hover:bg-electric hover:text-foreground hover:border-electric transition-all"
+              aria-label="Facebook"
+            >
+              <Facebook className="h-5 w-5" />
+            </a>
+            <a
+              href="#"
+              className="w-11 h-11 bg-secondary border border-primary/20 flex items-center justify-center no-underline text-grey clip-skew-sm hover:bg-electric hover:text-foreground hover:border-electric transition-all"
+              aria-label="YouTube"
+            >
+              <Youtube className="h-5 w-5" />
+            </a>
+            <a
+              href="#"
+              className="w-11 h-11 bg-secondary border border-primary/20 flex items-center justify-center no-underline text-grey clip-skew-sm hover:bg-electric hover:text-foreground hover:border-electric transition-all"
+              aria-label="TikTok"
+            >
+              <Music className="h-5 w-5" />
+            </a>
           </div>
 
           {/* Watermark */}
@@ -110,35 +141,6 @@ const ContactSection = () => {
               </div>
             </div>
             <div className="mb-4">
-              <label className="block font-display font-semibold text-[0.7rem] tracking-[0.25em] uppercase text-grey mb-2">Clase de interés</label>
-              <select
-                value={formData.clase}
-                onChange={(e) => setFormData({ ...formData, clase: e.target.value })}
-                className="w-full bg-navy-3 border border-dim/40 border-b-dim text-foreground py-3.5 px-[18px] font-body text-[0.9rem] outline-none focus:border-electric focus:bg-secondary transition-all appearance-none"
-              >
-                <option value="" className="bg-navy-2">Selecciona una clase</option>
-                <option className="bg-navy-2">Boxing Fundamentals</option>
-                <option className="bg-navy-2">Boxing Fit</option>
-                <option className="bg-navy-2">Sparring & Técnica</option>
-                <option className="bg-navy-2">Acondicionamiento</option>
-                <option className="bg-navy-2">Kids Boxing</option>
-                <option className="bg-navy-2">Entrenamiento Privado</option>
-              </select>
-            </div>
-            <div className="mb-4">
-              <label className="block font-display font-semibold text-[0.7rem] tracking-[0.25em] uppercase text-grey mb-2">¿Tienes experiencia previa?</label>
-              <select
-                value={formData.experiencia}
-                onChange={(e) => setFormData({ ...formData, experiencia: e.target.value })}
-                className="w-full bg-navy-3 border border-dim/40 border-b-dim text-foreground py-3.5 px-[18px] font-body text-[0.9rem] outline-none focus:border-electric focus:bg-secondary transition-all appearance-none"
-              >
-                <option className="bg-navy-2">Soy completamente nuevo</option>
-                <option className="bg-navy-2">Algo de experiencia</option>
-                <option className="bg-navy-2">Intermedio</option>
-                <option className="bg-navy-2">Avanzado / Competitivo</option>
-              </select>
-            </div>
-            <div className="mb-4">
               <label className="block font-display font-semibold text-[0.7rem] tracking-[0.25em] uppercase text-grey mb-2">Mensaje (opcional)</label>
               <textarea
                 placeholder="¿Algo que debamos saber antes de tu primera clase?"
@@ -157,21 +159,16 @@ const ContactSection = () => {
         </div>
       </section>
 
-      {/* Map Placeholder */}
-      <div className="bg-background h-[300px] flex items-center justify-center border-t border-primary/15 relative overflow-hidden">
-        <div
-          className="absolute inset-0"
-          style={{
-            backgroundImage: "linear-gradient(hsla(214,80%,48%,0.06) 1px, transparent 1px), linear-gradient(90deg, hsla(214,80%,48%,0.06) 1px, transparent 1px)",
-            backgroundSize: "40px 40px",
-          }}
+      <div className="bg-background border-t border-primary/15 flex justify-center px-6 md:px-[60px] py-10">
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1958.3479052977393!2d-100.29205946139848!3d25.651015557609377!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8662bf6332063c8f%3A0x9710b5a6941b6d62!2sBlue%20Corner%20Boxing%20Club!5e0!3m2!1ses!2smx!4v1772625872046!5m2!1ses!2smx"
+          className="w-full max-w-[640px] h-[380px] md:h-[450px]"
+          style={{ border: 0 }}
+          allowFullScreen
+          loading="lazy"
+          referrerPolicy="no-referrer-when-downgrade"
+          title="Ubicación en Google Maps"
         />
-        <div className="relative z-10 text-center">
-          <div className="w-4 h-4 bg-electric rounded-full mx-auto mb-2 animate-pulse-ring" />
-          <div className="font-display font-bold text-[0.8rem] tracking-[0.2em] uppercase text-grey">
-            Corner Boxing Academy · Monterrey
-          </div>
-        </div>
       </div>
     </>
   );

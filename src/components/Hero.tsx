@@ -1,17 +1,80 @@
+import { useEffect, useMemo, useState } from "react";
+
+type HeroMedia =
+  | { type: "image"; src: string }
+  | { type: "video"; src: string };
+
 const Hero = () => {
   const scrollTo = (id: string) => {
     document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
   };
 
+  const media = useMemo<HeroMedia[]>(
+    () => [
+      { type: "video", src: "/videosparring.mp4" },
+      { type: "image", src: "/fotocorner.jpg" },
+      { type: "image", src: "/466735289_18063462832823411_3009361582022820811_n.jpg" },
+      { type: "image", src: "/j.jpg" },
+    ],
+    [],
+  );
+
+  const [activeIndex, setActiveIndex] = useState(0);
+
+  useEffect(() => {
+    if (media.length <= 1) return;
+
+    const id = window.setInterval(() => {
+      setActiveIndex((i) => (i + 1) % media.length);
+    }, 7500);
+
+    return () => window.clearInterval(id);
+  }, [media.length]);
+
   return (
     <section id="hero" className="min-h-screen relative flex items-center overflow-hidden">
       {/* Background layers */}
-      <div className="absolute inset-0 bg-gradient-to-br from-background via-card to-secondary" />
+      <div className="absolute inset-0">
+        {media.map((m, i) => {
+          if (m.type === "video") {
+            return (
+              <div
+                key={m.src}
+                className="absolute inset-0 transition-opacity duration-1000"
+                style={{ opacity: i === activeIndex ? 1 : 0 }}
+              >
+                <video
+                  className="h-full w-full object-cover"
+                  src={m.src}
+                  autoPlay
+                  muted
+                  loop
+                  playsInline
+                />
+              </div>
+            );
+          }
+
+          return (
+            <div
+              key={m.src}
+              className="absolute inset-0 transition-opacity duration-1000"
+              style={{
+                opacity: i === activeIndex ? 1 : 0,
+                backgroundImage: `url('${m.src}')`,
+                backgroundSize: "cover",
+                backgroundPosition: "center",
+              }}
+            />
+          );
+        })}
+      </div>
+      <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/55 to-black/20" />
       <div
         className="absolute inset-0"
         style={{
           background:
-            "radial-gradient(ellipse 80% 60% at 70% 50%, hsla(213, 60%, 15%, 0.8) 0%, transparent 70%), radial-gradient(ellipse 40% 80% at 20% 60%, hsla(214, 80%, 48%, 0.08) 0%, transparent 60%)",
+            "radial-gradient(ellipse 80% 60% at 70% 50%, hsla(0, 0%, 0%, 0.45) 0%, transparent 70%), radial-gradient(ellipse 40% 80% at 20% 60%, hsla(214, 80%, 48%, 0.10) 0%, transparent 60%)",
         }}
       />
       {/* Ring lines grid */}
@@ -27,7 +90,7 @@ const Hero = () => {
       <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-transparent via-electric to-transparent" />
 
       {/* Content */}
-      <div className="relative z-10 px-6 md:px-[60px] max-w-[900px]">
+      <div className="relative z-10 px-6 md:px-[60px] max-w-[900px] pt-16 md:pt-20">
         <p
           className="font-display font-semibold text-[0.8rem] tracking-[0.35em] uppercase text-electric mb-6 opacity-0 animate-fade-up"
           style={{ animationDelay: "0.3s" }}
@@ -37,7 +100,7 @@ const Hero = () => {
         </p>
 
         <h1
-          className="font-display font-black text-[clamp(5rem,13vw,12rem)] leading-[0.88] uppercase tracking-tight opacity-0 animate-fade-up"
+          className="font-display font-black text-[clamp(4.1rem,10.8vw,9.5rem)] leading-[0.88] uppercase tracking-tight opacity-0 animate-fade-up"
           style={{ animationDelay: "0.5s" }}
         >
           Entra al

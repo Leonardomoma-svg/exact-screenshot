@@ -1,50 +1,22 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 
-const plans = [
-  {
-    name: "Contendiente",
-    price: "599",
-    featured: false,
-    features: [
-      { text: "4 clases grupales / semana", included: true },
-      { text: "Acceso a área de bolsas", included: true },
-      { text: "Vestuarios y lockers", included: true },
-      { text: "Clases de Kids Boxing", included: false },
-      { text: "Sesiones de sparring", included: false },
-      { text: "Descuento en tienda Aragón", included: false },
-    ],
-  },
-  {
-    name: "Campeón",
-    price: "899",
-    featured: true,
-    badge: "Más Popular",
-    features: [
-      { text: "Clases grupales ilimitadas", included: true },
-      { text: "Acceso a área de bolsas", included: true },
-      { text: "Vestuarios y lockers", included: true },
-      { text: "Clases de Kids Boxing", included: true },
-      { text: "Sesiones de sparring (2/sem)", included: true },
-      { text: "10% descuento en Aragón", included: true },
-    ],
-  },
-  {
-    name: "Elite",
-    price: "1,599",
-    featured: false,
-    features: [
-      { text: "Todo del plan Campeón", included: true },
-      { text: "2 sesiones privadas / mes", included: true },
-      { text: "Plan de nutrición", included: true },
-      { text: "Análisis de video técnico", included: true },
-      { text: "Sparring ilimitado", included: true },
-      { text: "20% descuento en Aragón", included: true },
-    ],
-  },
+const baseFeatures = [
+  { text: "Clases ilimitadas", included: true },
+  { text: "Acceso a área de bolsas", included: true },
+  { text: "Vestuarios y lockers", included: true },
 ];
 
 const MembershipsSection = () => {
   const ref = useRef<HTMLDivElement>(null);
+  const [annualType, setAnnualType] = useState<"estudiante" | "campeon">("estudiante");
+
+  const money = useMemo(
+    () =>
+      new Intl.NumberFormat("es-MX", {
+        maximumFractionDigits: 0,
+      }),
+    [],
+  );
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -56,6 +28,29 @@ const MembershipsSection = () => {
   }, []);
 
   const scrollTo = (id: string) => document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
+
+  const annualMonthly = annualType === "estudiante" ? 1000 : 1200;
+  const annualTotal = Math.round(annualMonthly * 12 * 0.85);
+
+  const plans = useMemo(
+    () => [
+      {
+        name: "Estudiante",
+        price: 1000,
+        featured: false,
+        note: "Descuento mostrando credencial de estudiante vigente.",
+        features: baseFeatures,
+      },
+      {
+        name: "Campeón",
+        price: 1200,
+        featured: true,
+        badge: "Más Popular",
+        features: baseFeatures,
+      },
+    ],
+    [],
+  );
 
   return (
     <section id="membresias" className="bg-background py-[100px] px-6 md:px-[60px]" ref={ref}>
@@ -84,9 +79,14 @@ const MembershipsSection = () => {
             )}
             <div className="font-display font-bold text-[0.8rem] tracking-[0.25em] uppercase text-grey mb-6">{plan.name}</div>
             <div className="font-display font-black text-[4.5rem] leading-none text-foreground mb-1">
-              <sup className="text-[1.8rem] align-super text-grey">$</sup>{plan.price}
+              <sup className="text-[1.8rem] align-super text-grey">$</sup>{money.format(plan.price)}
             </div>
             <div className="text-[0.8rem] text-grey mb-9">/ mes · IVA incluido</div>
+            {plan.note && (
+              <div className="text-[0.85rem] text-grey mb-8 leading-relaxed">
+                {plan.note}
+              </div>
+            )}
             <ul className="list-none mb-11">
               {plan.features.map((f) => (
                 <li
@@ -114,6 +114,75 @@ const MembershipsSection = () => {
             </button>
           </div>
         ))}
+
+        <div className="reveal reveal-delay-3 relative overflow-hidden p-[50px_40px] border-t-[3px] transition-all duration-300 bg-navy-3 border-t-transparent hover:border-t-dim">
+          <div className="absolute top-5 right-5 font-display font-black text-[0.7rem] tracking-[0.22em] uppercase bg-electric text-foreground py-[6px] px-4 clip-skew-sm shadow-[0_16px_40px_rgba(0,0,0,0.45)]">
+            15% OFF
+          </div>
+          <div className="font-display font-bold text-[0.8rem] tracking-[0.25em] uppercase text-grey mb-6">Anualidad</div>
+          <div className="font-display font-black text-[4.5rem] leading-none text-foreground mb-1">
+            <sup className="text-[1.8rem] align-super text-grey">$</sup>{money.format(annualTotal)}
+          </div>
+          <div className="text-[0.85rem] text-grey mb-7">
+            / año · <span className="text-electric font-display font-black tracking-[0.18em] uppercase">15% descuento</span> · IVA incluido
+          </div>
+
+          <div className="mb-8">
+            <div className="text-[0.75rem] tracking-[0.25em] uppercase text-grey mb-3 font-display font-bold">
+              Selecciona tu plan
+            </div>
+            <div className="grid grid-cols-2 gap-2">
+              <button
+                type="button"
+                onClick={() => setAnnualType("estudiante")}
+                className={`py-3 px-4 border clip-skew-sm font-display font-bold text-[0.75rem] tracking-[0.2em] uppercase transition-all ${
+                  annualType === "estudiante"
+                    ? "bg-electric border-electric text-foreground"
+                    : "bg-transparent border-dim text-grey hover:bg-secondary hover:text-foreground"
+                }`}
+              >
+                Estudiante
+              </button>
+              <button
+                type="button"
+                onClick={() => setAnnualType("campeon")}
+                className={`py-3 px-4 border clip-skew-sm font-display font-bold text-[0.75rem] tracking-[0.2em] uppercase transition-all ${
+                  annualType === "campeon"
+                    ? "bg-electric border-electric text-foreground"
+                    : "bg-transparent border-dim text-grey hover:bg-secondary hover:text-foreground"
+                }`}
+              >
+                Campeón
+              </button>
+            </div>
+            <div className="mt-4 text-[0.85rem] text-grey leading-relaxed">
+              Calculado como <span className="text-foreground">${money.format(annualMonthly)} x 12</span> con <span className="text-electric font-bold">15% de descuento</span>.
+            </div>
+          </div>
+
+          <ul className="list-none mb-11">
+            {baseFeatures.map((f) => (
+              <li
+                key={`annual-${f.text}`}
+                className="text-[0.9rem] py-2.5 border-b border-dim/30 flex items-center gap-2.5 text-foreground"
+              >
+                <span className="text-electric font-bold">✓</span>
+                {f.text}
+              </li>
+            ))}
+            <li className="text-[0.9rem] py-2.5 border-b border-dim/30 flex items-center gap-2.5 text-foreground">
+              <span className="text-electric font-bold">✓</span>
+              20% descuento en Aragón
+            </li>
+          </ul>
+
+          <button
+            onClick={() => scrollTo("contacto")}
+            className="font-display font-bold text-[0.85rem] tracking-[0.2em] uppercase w-full py-4 clip-skew-md transition-all bg-transparent border border-dim text-grey hover:bg-electric hover:border-electric hover:text-foreground"
+          >
+            Empezar
+          </button>
+        </div>
       </div>
 
       <p className="reveal text-center text-grey text-[0.85rem]">

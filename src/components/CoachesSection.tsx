@@ -1,9 +1,8 @@
 import { useEffect, useRef } from "react";
 
 const coaches = [
-  { initials: "RV", role: "Head Coach · 18 años de experiencia", name: "Roberto Vega", bio: "Excampeón estatal y representante nacional. Especialista en técnica ofensiva y preparación para competencia amateur y profesional." },
-  { initials: "CR", role: "Coach · Boxing Fit & Acondicionamiento", name: "Carlos Ramírez", bio: "Certificado en fuerza y acondicionamiento. Transforma atletas con métodos de entrenamiento funcional específicos para el boxeo." },
-  { initials: "LM", role: "Coach · Fundamentos & Kids", name: "Luis Medina", bio: "Experto en enseñanza de base para principiantes y programa juvenil. Su metodología ha formado a decenas de boxeadores competitivos." },
+  { initials: "CR", role: "Campeón profesional · 20 años boxeando", name: "Chavita Rodríguez", bio: "20 años boxeando y campeón profesional." },
+  { initials: "HG", role: "Coach · 12 años de experiencia", name: "Hugo", bio: "12 años de experiencia." },
 ];
 
 const CoachesSection = () => {
@@ -28,7 +27,7 @@ const CoachesSection = () => {
         Entrenadores<br /><em className="italic text-stroke not-italic">de élite</em>
       </h2>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-[30px]">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-[30px]">
         {coaches.map((coach, i) => (
           <div
             key={coach.name}
