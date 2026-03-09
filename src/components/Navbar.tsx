@@ -3,6 +3,7 @@ import { useEffect, useState, useRef } from "react";
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
   const [activeId, setActiveId] = useState<string>("hero");
+  const [mobileOpen, setMobileOpen] = useState(false);
   const rafRef = useRef<number | null>(null);
 
   useEffect(() => {
@@ -13,6 +14,7 @@ const Navbar = () => {
 
   const scrollTo = (id: string) => {
     document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
+    setMobileOpen(false);
   };
 
   const links = [
@@ -69,13 +71,14 @@ const Navbar = () => {
   }, []);
 
   return (
-    <nav
-      className={`fixed top-0 left-0 right-0 z-50 flex items-center justify-between transition-all duration-300 ${
-        scrolled
-          ? "py-4 px-[60px] bg-black/35 border-b border-white/10"
-          : "py-6 px-[60px] bg-transparent"
-      } backdrop-blur-sm`}
-    >
+    <>
+      <nav
+        className={`fixed top-0 left-0 right-0 z-50 flex items-center justify-between transition-all duration-300 ${
+          scrolled
+            ? "py-4 px-6 lg:px-[60px] bg-black/35 border-b border-white/10"
+            : "py-6 px-6 lg:px-[60px] bg-transparent"
+        } backdrop-blur-sm`}
+      >
       <a
         href="#hero"
         onClick={(e) => { e.preventDefault(); scrollTo("hero"); }}
@@ -107,6 +110,15 @@ const Navbar = () => {
         ))}
       </ul>
 
+      <button
+        type="button"
+        onClick={() => setMobileOpen((v) => !v)}
+        aria-label={mobileOpen ? "Cerrar menú" : "Abrir menú"}
+        className="lg:hidden h-11 w-11 rounded-xl border border-white/15 bg-black/25 text-white flex items-center justify-center backdrop-blur-sm"
+      >
+        <span className="text-[1.35rem] leading-none">{mobileOpen ? "×" : "☰"}</span>
+      </button>
+
       <a
         href="https://wa.me/528180836450"
         target="_blank"
@@ -126,7 +138,56 @@ const Navbar = () => {
       >
         Clase Gratis
       </button>
-    </nav>
+      </nav>
+
+      {mobileOpen && (
+        <div
+          className="fixed inset-0 z-[60] lg:hidden bg-black/55"
+          onClick={() => setMobileOpen(false)}
+          role="dialog"
+          aria-modal="true"
+        >
+          <div
+            className="absolute top-[72px] left-4 right-4 rounded-2xl border border-white/10 bg-black/70 backdrop-blur-md overflow-hidden"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="p-4 grid gap-2">
+              {links.map((link) => (
+                <button
+                  key={link.id}
+                  type="button"
+                  onClick={() => scrollTo(link.id)}
+                  className={`w-full text-left rounded-xl border px-4 py-3 font-display font-black tracking-[0.18em] uppercase text-[0.85rem] transition-colors ${
+                    activeId === link.id
+                      ? "bg-secondary border-electric text-white"
+                      : "bg-black/25 border-white/10 text-white/85"
+                  }`}
+                >
+                  {link.label}
+                </button>
+              ))}
+
+              <a
+                href="https://wa.me/528180836450"
+                target="_blank"
+                rel="noreferrer"
+                className="mt-2 w-full text-left rounded-xl border px-4 py-3 font-display font-black tracking-[0.18em] uppercase text-[0.85rem] transition-colors bg-[#25D366] border-[#25D366] text-white"
+              >
+                WhatsApp
+              </a>
+
+              <button
+                type="button"
+                onClick={() => scrollTo("contacto")}
+                className="w-full text-left rounded-xl border px-4 py-3 font-display font-black tracking-[0.18em] uppercase text-[0.85rem] transition-colors bg-electric border-electric text-foreground"
+              >
+                Clase Gratis
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+    </>
   );
 };
 

@@ -171,6 +171,7 @@ const days = ["Lun", "Mar", "Mié", "Jue", "Vie", "Sáb"];
 const ScheduleSection = () => {
   const ref = useRef<HTMLDivElement>(null);
   const [selected, setSelected] = useState<SelectedSlot | null>(null);
+  const [mobileDayIndex, setMobileDayIndex] = useState(0);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -211,9 +212,87 @@ const ScheduleSection = () => {
         Horarios<br /><em className="italic text-stroke not-italic">semanales</em>
       </h2>
 
-      <div className="reveal overflow-x-auto">
+      <div className="reveal md:hidden">
+        <div className="flex gap-2 overflow-x-auto pb-3">
+          {days.map((d, i) => (
+            <button
+              key={d}
+              type="button"
+              onClick={() => setMobileDayIndex(i)}
+              className={`shrink-0 rounded-xl border px-4 py-3 font-display font-black text-[0.75rem] tracking-[0.28em] uppercase transition-colors shadow-[0_10px_24px_rgba(0,0,0,0.22)] ${
+                mobileDayIndex === i
+                  ? "bg-secondary border-electric text-foreground"
+                  : "bg-secondary/40 border-primary/10 text-foreground/75"
+              }`}
+            >
+              {d}
+            </button>
+          ))}
+        </div>
+
+        <div className="grid gap-2">
+          {scheduleData.map((row) => {
+            const cell = row.cells[mobileDayIndex];
+            const accent = cell?.coach ? coachAccent[cell.coach] : undefined;
+            const isFilled = Boolean(cell);
+            const isKids = cell?.tag === "Niños";
+
+            return (
+              <button
+                key={`${row.time}-${mobileDayIndex}`}
+                type="button"
+                className={`w-full text-left rounded-xl border p-4 transition-colors shadow-[0_14px_34px_rgba(0,0,0,0.25)] ${
+                  isFilled
+                    ? `relative bg-secondary/70 border-primary/15 ${isKids ? "ring-1 ring-white/35" : ""}`
+                    : "bg-secondary/15 border-primary/10"
+                }`}
+                onClick={
+                  isFilled
+                    ? () => setSelected({ dayIndex: mobileDayIndex, time: row.time, coach: cell?.coach })
+                    : undefined
+                }
+                disabled={!isFilled}
+              >
+                {isFilled && (
+                  <div className={`absolute left-0 top-0 bottom-0 w-[5px] rounded-l-xl ${accent?.bar ?? "bg-electric"}`} />
+                )}
+
+                <div className="flex items-center justify-between gap-3">
+                  <div className="font-display font-black tracking-[0.18em] text-[0.95rem] text-foreground/90">
+                    {row.time}
+                  </div>
+                  {isKids && (
+                    <div className="rounded-full bg-white/10 border border-white/15 px-2 py-1">
+                      <div className="text-[0.65rem] tracking-[0.22em] uppercase text-foreground/85 font-black">
+                        Niños
+                      </div>
+                    </div>
+                  )}
+                </div>
+
+                {isFilled ? (
+                  <div className={`mt-3 rounded-lg border border-primary/10 bg-gradient-to-br ${accent?.bg ?? "from-electric/20 via-secondary/85 to-secondary/70"} px-3 py-2`}
+                  >
+                    <div className="text-[0.7rem] tracking-[0.28em] uppercase text-foreground/70 font-bold">
+                      Box
+                    </div>
+                    <div className={`mt-1 text-[1.05rem] font-black tracking-wide ${accent?.text ?? "text-electric"}`}>
+                      {cell?.coach}
+                    </div>
+                  </div>
+                ) : (
+                  <div className="mt-3 text-[0.8rem] tracking-[0.22em] uppercase text-dim font-display font-black">
+                    —
+                  </div>
+                )}
+              </button>
+            );
+          })}
+        </div>
+      </div>
+
+      <div className="reveal hidden md:block overflow-x-auto">
         <div className="grid font-display gap-2 min-w-[760px]" style={{ gridTemplateColumns: "100px repeat(6, 1fr)" }}>
-          {/* Headers */}
           <div className="bg-transparent p-4" />
           {days.map((d) => (
             <div
@@ -224,7 +303,6 @@ const ScheduleSection = () => {
             </div>
           ))}
 
-          {/* Rows */}
           {scheduleData.map((row) => (
             <div key={row.time} className="contents">
               <div className="rounded-xl bg-secondary/40 border border-primary/10 px-4 py-3 flex items-center justify-center shadow-[0_10px_22px_rgba(0,0,0,0.18)]">

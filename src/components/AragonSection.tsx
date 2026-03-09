@@ -25,14 +25,14 @@ const AragonSection = () => {
       "/05-Lila-1.jpg",
       "/06-FusciaAqua-1.jpg",
       "/07-VerdeBeige-1.jpg",
-      encodeURI("/08-CaféLeón-1.jpg"),
+      "/08-CafeLeon-1.jpg",
       "/09-DoradoChava-1.jpg",
       "/10-Plateados-1.jpg",
       "/11-Tricolor-1.jpg",
       "/12-VerdeDorado-1.jpg",
       "/13-AzulChiki-1.jpg",
       "/15-RojoVerde-1.jpg",
-      encodeURI("/17_AzulLeón-1.jpg"),
+      "/17_AzulLeon-1.jpg",
       "/19-Dordao-1.jpg",
       "/21-TricolorMX-1.jpg",
       "/23-Naranjas-1.jpg",
@@ -138,6 +138,102 @@ const AragonSection = () => {
     <section id="aragon" className="bg-navy-2 py-[100px] px-6 md:px-[60px] relative overflow-visible" ref={ref}>
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
         {/* Visual */}
+        <div className="reveal flex lg:hidden relative items-center justify-center">
+          <div className="w-full max-w-[420px] flex flex-col items-center justify-center">
+            <div className="relative w-full flex flex-col gap-10">
+              <div className="relative w-full flex items-center justify-center">
+                <div className="w-[260px] h-[210px] relative flex-shrink-0">
+                  <img
+                    src={gloveImages[displayGloveIndex]}
+                    alt="Guantes Aragón"
+                    className={`absolute inset-0 w-full h-full object-contain transition-opacity duration-300 ${
+                      isGloveFading ? "opacity-0" : "opacity-100"
+                    }`}
+                    draggable={false}
+                  />
+                  <button
+                    type="button"
+                    onClick={prevGlove}
+                    className="absolute left-0 top-1/2 -translate-y-1/2 h-11 w-11 -translate-x-2 rounded-full bg-white/20 border border-white/30 text-white shadow-[0_14px_40px_rgba(0,0,0,0.55)] hover:bg-white/30 transition-colors text-[1.8rem] leading-none"
+                    aria-label="Modelo anterior"
+                  >
+                    ‹
+                  </button>
+                  <button
+                    type="button"
+                    onClick={nextGlove}
+                    className="absolute right-0 top-1/2 -translate-y-1/2 h-11 w-11 translate-x-2 rounded-full bg-white/20 border border-white/30 text-white shadow-[0_14px_40px_rgba(0,0,0,0.55)] hover:bg-white/30 transition-colors text-[1.8rem] leading-none"
+                    aria-label="Siguiente modelo"
+                  >
+                    ›
+                  </button>
+                  <div className="absolute bottom-[-34px] left-0 right-0 grid grid-flow-col grid-rows-2 justify-center gap-x-2 gap-y-2">
+                    {gloveImages.map((_, i) => (
+                      <button
+                        key={i}
+                        type="button"
+                        onClick={() => {
+                          pauseGloveAuto();
+                          setActiveGloveIndex(i);
+                        }}
+                        className={`h-2.5 w-2.5 rounded-full transition-all duration-200 ${
+                          i === activeGloveIndex
+                            ? "bg-electric scale-[1.25]"
+                            : "bg-white/25 hover:bg-white/65"
+                        }`}
+                        aria-label={`Ver guante ${i + 1}`}
+                      />
+                    ))}
+                  </div>
+                </div>
+              </div>
+
+              <div className="relative w-full flex items-center justify-center">
+                <div className="w-[260px] h-[210px] relative flex-shrink-0">
+                  <img
+                    src={maskImages[displayMaskIndex]}
+                    alt="Caretas Aragón"
+                    className={`absolute inset-0 w-full h-full object-contain transition-opacity duration-300 ${
+                      isMaskFading ? "opacity-0" : "opacity-100"
+                    }`}
+                    draggable={false}
+                  />
+                  <button
+                    type="button"
+                    onClick={prevMask}
+                    className="absolute left-0 top-1/2 -translate-y-1/2 h-11 w-11 -translate-x-2 rounded-full bg-white/20 border border-white/30 text-white shadow-[0_14px_40px_rgba(0,0,0,0.55)] hover:bg-white/30 transition-colors text-[1.8rem] leading-none"
+                    aria-label="Modelo anterior"
+                  >
+                    ‹
+                  </button>
+                  <button
+                    type="button"
+                    onClick={nextMask}
+                    className="absolute right-0 top-1/2 -translate-y-1/2 h-11 w-11 translate-x-2 rounded-full bg-white/20 border border-white/30 text-white shadow-[0_14px_40px_rgba(0,0,0,0.55)] hover:bg-white/30 transition-colors text-[1.8rem] leading-none"
+                    aria-label="Siguiente modelo"
+                  >
+                    ›
+                  </button>
+                  <div className="absolute bottom-[-26px] left-0 right-0 flex justify-center gap-2">
+                    {maskImages.map((_, i) => (
+                      <button
+                        key={i}
+                        type="button"
+                        onClick={() => setActiveMaskIndex(i)}
+                        className={`h-2.5 w-2.5 rounded-full transition-all duration-200 ${
+                          i === activeMaskIndex
+                            ? "bg-electric scale-[1.25]"
+                            : "bg-white/25 hover:bg-white/65"
+                        }`}
+                        aria-label={`Ver careta ${i + 1}`}
+                      />
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
         <div className="reveal hidden lg:flex relative items-center justify-center">
           <div className="relative w-[520px] h-[520px] xl:w-[600px] xl:h-[600px] flex items-center justify-center">
             <div className="relative z-10 h-full flex flex-col">
