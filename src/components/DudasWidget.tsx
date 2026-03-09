@@ -119,13 +119,13 @@ const DudasWidget = () => {
       <button
         type="button"
         onClick={() => setOpen((v) => !v)}
-        className="group inline-flex items-center gap-3 rounded-full bg-electric px-5 py-4 text-foreground shadow-[0_18px_50px_rgba(0,0,0,0.4)] hover:bg-electric-hover transition-colors"
+        className="group inline-flex items-center gap-3 rounded-full bg-electric px-4 py-3 md:px-5 md:py-4 text-foreground shadow-[0_18px_50px_rgba(0,0,0,0.4)] hover:bg-electric-hover transition-colors"
         aria-label="Abrir dudas"
       >
-        <span className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-black/15">
-          <MessageCircle className="h-6 w-6" />
+        <span className="inline-flex h-9 w-9 md:h-10 md:w-10 items-center justify-center rounded-full bg-black/15">
+          <MessageCircle className="h-5 w-5 md:h-6 md:w-6" />
         </span>
-        <span className="font-display font-black tracking-[0.08em] uppercase">
+        <span className="hidden sm:inline font-display font-black tracking-[0.08em] uppercase">
           Dudas
         </span>
       </button>

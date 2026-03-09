@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const classes = [
   { num: "01", tag: "Fundamentos", name: "Boxing Fundamentals", desc: "Aprende los fundamentos del boxeo: guardia, footwork, jab, cross, hook y uppercut. La base de todo gran boxeador.", time: "60 min", level: "Todos los niveles" },
@@ -11,6 +11,7 @@ const classes = [
 
 const ClassesSection = () => {
   const ref = useRef<HTMLDivElement>(null);
+  const [mobileActive, setMobileActive] = useState(0);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -31,7 +32,45 @@ const ClassesSection = () => {
         Lo que <em className="italic text-stroke not-italic">hacemos</em><br />mejor
       </h2>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-0.5">
+      <div className="reveal md:hidden">
+        <div className="flex gap-2 overflow-x-auto pb-3">
+          {classes.map((cls, i) => (
+            <button
+              key={cls.num}
+              type="button"
+              onClick={() => setMobileActive(i)}
+              className={`shrink-0 rounded-xl border px-4 py-3 font-display font-black text-[0.72rem] tracking-[0.22em] uppercase transition-colors ${
+                mobileActive === i
+                  ? "bg-secondary border-electric text-foreground"
+                  : "bg-navy-3 border-primary/10 text-grey"
+              }`}
+            >
+              {cls.tag}
+            </button>
+          ))}
+        </div>
+
+        <div className="bg-navy-3 p-8 relative overflow-hidden border-b-[3px] border-electric">
+          <div className="absolute top-5 right-[22px] font-display font-black text-[4.2rem] text-primary/10 leading-none">
+            {classes[mobileActive].num}
+          </div>
+          <div className="font-display font-bold text-[0.7rem] tracking-[0.25em] uppercase text-electric mb-4">
+            {classes[mobileActive].tag}
+          </div>
+          <div className="font-display font-black text-[1.6rem] uppercase mb-3 leading-none">
+            {classes[mobileActive].name}
+          </div>
+          <div className="text-[0.9rem] text-grey leading-relaxed mb-7">
+            {classes[mobileActive].desc}
+          </div>
+          <div className="flex flex-col gap-2 font-display text-[0.8rem] tracking-wider text-dim">
+            <span className="flex items-center gap-1.5">⏱ {classes[mobileActive].time}</span>
+            <span className="flex items-center gap-1.5">👥 {classes[mobileActive].level}</span>
+          </div>
+        </div>
+      </div>
+
+      <div className="hidden md:grid grid-cols-1 md:grid-cols-3 gap-0.5">
         {classes.map((cls, i) => (
           <div
             key={cls.num}

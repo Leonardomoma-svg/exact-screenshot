@@ -44,7 +44,7 @@ const Hero = () => {
                 style={{ opacity: i === activeIndex ? 1 : 0 }}
               >
                 <video
-                  className="h-full w-full object-cover"
+                  className="h-full w-full object-contain md:object-cover bg-black"
                   src={m.src}
                   autoPlay
                   muted
@@ -59,13 +59,16 @@ const Hero = () => {
             <div
               key={m.src}
               className="absolute inset-0 transition-opacity duration-1000"
-              style={{
-                opacity: i === activeIndex ? 1 : 0,
-                backgroundImage: `url('${m.src}')`,
-                backgroundSize: "cover",
-                backgroundPosition: "center",
-              }}
-            />
+              style={{ opacity: i === activeIndex ? 1 : 0 }}
+            >
+              <img
+                src={m.src}
+                alt=""
+                className="h-full w-full object-contain md:object-cover bg-black"
+                draggable={false}
+                loading="lazy"
+              />
+            </div>
           );
         })}
       </div>
@@ -90,9 +93,9 @@ const Hero = () => {
       <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-transparent via-electric to-transparent" />
 
       {/* Content */}
-      <div className="relative z-10 px-6 md:px-[60px] max-w-[900px] pt-16 md:pt-20">
+      <div className="relative z-10 px-6 md:px-[60px] max-w-[900px] pt-10 md:pt-20">
         <p
-          className="font-display font-semibold text-[0.8rem] tracking-[0.35em] uppercase text-electric mb-6 opacity-0 animate-fade-up"
+          className="font-display font-semibold text-[0.8rem] tracking-[0.35em] uppercase text-electric mb-4 md:mb-6 opacity-0 animate-fade-up"
           style={{ animationDelay: "0.3s" }}
         >
           <span className="inline-block w-10 h-px bg-electric align-middle mr-3" />
