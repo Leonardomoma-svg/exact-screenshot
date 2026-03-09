@@ -350,7 +350,7 @@ const AragonSection = () => {
             </div>
           </div>
 
-          <p className="reveal text-base text-grey leading-snug mb-6">
+          <p className="reveal text-base text-grey leading-snug mb-6 mt-8 lg:mt-0">
             Aragón es la marca de guantes oficial de Corner. Diseñados y probados en nuestro gimnasio, cada par está construido para resistir los entrenamientos más intensos sin sacrificar protección ni comodidad.
           </p>
           <div className="reveal grid grid-cols-1 sm:grid-cols-2 gap-5 mb-11">

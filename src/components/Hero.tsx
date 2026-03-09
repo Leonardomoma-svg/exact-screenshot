@@ -32,7 +32,7 @@ const Hero = () => {
   }, [media.length]);
 
   return (
-    <section id="hero" className="min-h-screen relative flex items-center overflow-hidden">
+    <section id="hero" className="min-h-screen relative flex items-start md:items-center overflow-hidden">
       {/* Background layers */}
       <div className="absolute inset-0">
         {media.map((m, i) => {
@@ -93,7 +93,7 @@ const Hero = () => {
       <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-transparent via-electric to-transparent" />
 
       {/* Content */}
-      <div className="relative z-10 px-6 md:px-[60px] max-w-[900px] pt-10 md:pt-20">
+      <div className="relative z-10 px-6 md:px-[60px] max-w-[900px] pt-6 md:pt-20">
         <p
           className="font-display font-semibold text-[0.8rem] tracking-[0.35em] uppercase text-electric mb-4 md:mb-6 opacity-0 animate-fade-up"
           style={{ animationDelay: "0.3s" }}
@@ -103,7 +103,7 @@ const Hero = () => {
         </p>
 
         <h1
-          className="font-display font-black text-[clamp(4.1rem,10.8vw,9.5rem)] leading-[0.88] uppercase tracking-tight opacity-0 animate-fade-up"
+          className="mt-10 md:mt-0 font-display font-black text-[clamp(3.3rem,9.8vw,5.6rem)] md:text-[clamp(4.1rem,10.8vw,9.5rem)] leading-[0.88] uppercase tracking-tight opacity-0 animate-fade-up"
           style={{ animationDelay: "0.5s" }}
         >
           Entra al
@@ -113,7 +113,7 @@ const Hero = () => {
         </h1>
 
         <p
-          className="text-lg text-grey max-w-[460px] leading-relaxed mt-8 mb-12 opacity-0 animate-fade-up"
+          className="text-base md:text-lg text-grey max-w-[460px] leading-relaxed mt-6 md:mt-8 mb-10 md:mb-12 opacity-0 animate-fade-up"
           style={{ animationDelay: "0.7s" }}
         >
           Entrenamiento de alto rendimiento para todos los niveles. Técnica, disciplina y la mentalidad de un campeón.

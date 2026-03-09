@@ -33,7 +33,7 @@ const ClassesSection = () => {
       </h2>
 
       <div className="reveal md:hidden">
-        <div className="flex gap-2 overflow-x-auto pb-3">
+        <div className="grid grid-cols-3 gap-2 pb-3">
           {classes.map((cls, i) => (
             <button
               key={cls.num}

@@ -36,6 +36,7 @@ const MembershipsSection = () => {
   const plans = useMemo(
     () => [
       {
+        id: "estudiante",
         name: "Estudiante",
         price: 1000,
         featured: false,
@@ -43,6 +44,7 @@ const MembershipsSection = () => {
         features: baseFeatures,
       },
       {
+        id: "campeon",
         name: "Campeón",
         price: 1200,
         featured: true,
@@ -103,13 +105,13 @@ const MembershipsSection = () => {
         {mobileView !== "anual" && (
           <div
             className={`relative overflow-hidden p-[50px_30px] border-t-[3px] transition-all duration-300 ${
-              plans.find((p) => p.name.toLowerCase() === mobileView)?.featured
+              plans.find((p) => p.id === mobileView)?.featured
                 ? "bg-secondary border-t-electric"
                 : "bg-navy-3 border-t-transparent"
             }`}
           >
             {plans
-              .filter((p) => p.name.toLowerCase() === mobileView)
+              .filter((p) => p.id === mobileView)
               .map((plan) => (
                 <div key={plan.name}>
                   {plan.badge && (

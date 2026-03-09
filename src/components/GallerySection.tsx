@@ -49,8 +49,8 @@ const GallerySection = () => {
   }, [aragonActionImages.length, isAragonHovered]);
 
   return (
-    <section id="galeria" className="bg-background py-[100px] px-0" ref={ref}>
-      <div className="px-6 md:px-[60px] mb-[50px]">
+    <section id="galeria" className="bg-background py-[70px] md:py-[100px] px-0" ref={ref}>
+      <div className="px-6 md:px-[60px] mb-8 md:mb-[50px]">
         <div className="reveal font-display font-semibold text-[0.75rem] tracking-[0.35em] uppercase text-electric mb-4 flex items-center gap-3">
           <span className="w-6 h-0.5 bg-electric" />
           Galería
@@ -67,6 +67,11 @@ const GallerySection = () => {
             className={`overflow-hidden relative group ${i === 0 ? "md:row-span-2 col-span-2 md:col-span-1" : ""}`}
             onMouseEnter={i === 0 ? () => setIsAragonHovered(true) : undefined}
             onMouseLeave={i === 0 ? () => setIsAragonHovered(false) : undefined}
+            onClick={
+              i === 0
+                ? () => setActiveAragonIndex((v) => (v + 1) % aragonActionImages.length)
+                : undefined
+            }
           >
             {i === 0 ? (
               <img
@@ -77,6 +82,13 @@ const GallerySection = () => {
               />
             ) : (
               <div className="w-full h-full bg-white" />
+            )}
+            {i === 0 && (
+              <div className="absolute left-4 top-4 md:hidden rounded-full bg-black/35 border border-white/10 px-3 py-1 backdrop-blur-sm">
+                <div className="font-display font-black text-[0.65rem] tracking-[0.22em] uppercase text-white/90">
+                  Toca para cambiar
+                </div>
+              </div>
             )}
             <div className="absolute inset-0 bg-gradient-to-t from-background/90 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
               <span className="font-display font-bold text-base uppercase tracking-[0.15em] text-foreground">{item.label}</span>
