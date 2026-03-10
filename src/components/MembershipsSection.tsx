@@ -29,6 +29,10 @@ const MembershipsSection = () => {
   }, []);
 
   const scrollTo = (id: string) => document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
+  const scrollToForm = () => {
+    const el = document.getElementById("contacto-form") ?? document.getElementById("contacto");
+    el?.scrollIntoView({ behavior: "smooth" });
+  };
 
   const annualMonthly = annualType === "estudiante" ? 1000 : 1200;
   const annualTotal = Math.round(annualMonthly * 12 * 0.85);
@@ -145,12 +149,8 @@ const MembershipsSection = () => {
                     ))}
                   </ul>
                   <button
-                    onClick={() => scrollTo("contacto")}
-                    className={`font-display font-bold text-[0.85rem] tracking-[0.2em] uppercase w-full py-4 clip-skew-md transition-all ${
-                      plan.featured
-                        ? "bg-electric border border-electric text-foreground hover:bg-electric-hover"
-                        : "bg-transparent border border-dim text-grey hover:bg-electric hover:border-electric hover:text-foreground"
-                    }`}
+                    onClick={scrollToForm}
+                    className="font-display font-bold text-[0.85rem] tracking-[0.2em] uppercase w-full py-4 clip-skew-md transition-all bg-electric border border-electric text-foreground hover:bg-electric-hover"
                   >
                     Empezar
                   </button>
@@ -222,8 +222,8 @@ const MembershipsSection = () => {
             </ul>
 
             <button
-              onClick={() => scrollTo("contacto")}
-              className="font-display font-bold text-[0.85rem] tracking-[0.2em] uppercase w-full py-4 clip-skew-md transition-all bg-transparent border border-dim text-grey hover:bg-electric hover:border-electric hover:text-foreground"
+              onClick={scrollToForm}
+              className="font-display font-bold text-[0.85rem] tracking-[0.2em] uppercase w-full py-4 clip-skew-md transition-all bg-electric border border-electric text-foreground hover:bg-electric-hover"
             >
               Empezar
             </button>
@@ -272,12 +272,8 @@ const MembershipsSection = () => {
               ))}
             </ul>
             <button
-              onClick={() => scrollTo("contacto")}
-              className={`font-display font-bold text-[0.85rem] tracking-[0.2em] uppercase w-full py-4 clip-skew-md transition-all ${
-                plan.featured
-                  ? "bg-electric border border-electric text-foreground hover:bg-electric-hover"
-                  : "bg-transparent border border-dim text-grey hover:bg-electric hover:border-electric hover:text-foreground"
-              }`}
+              onClick={scrollToForm}
+              className="font-display font-bold text-[0.85rem] tracking-[0.2em] uppercase w-full py-4 clip-skew-md transition-all bg-electric border border-electric text-foreground hover:bg-electric-hover"
             >
               Empezar
             </button>
@@ -346,8 +342,8 @@ const MembershipsSection = () => {
           </ul>
 
           <button
-            onClick={() => scrollTo("contacto")}
-            className="font-display font-bold text-[0.85rem] tracking-[0.2em] uppercase w-full py-4 clip-skew-md transition-all bg-transparent border border-dim text-grey hover:bg-electric hover:border-electric hover:text-foreground"
+            onClick={scrollToForm}
+            className="font-display font-bold text-[0.85rem] tracking-[0.2em] uppercase w-full py-4 clip-skew-md transition-all bg-electric border border-electric text-foreground hover:bg-electric-hover"
           >
             Empezar
           </button>
@@ -358,7 +354,7 @@ const MembershipsSection = () => {
         Primera clase de prueba <strong className="text-foreground">completamente gratis</strong>. Sin compromiso.
         <a
           href="#contacto"
-          onClick={(e) => { e.preventDefault(); scrollTo("contacto"); }}
+          onClick={(e) => { e.preventDefault(); scrollToForm(); }}
           className="text-electric no-underline ml-2"
         >
           Reservar →

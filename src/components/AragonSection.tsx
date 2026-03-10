@@ -152,6 +152,14 @@ const AragonSection = () => {
                       }`}
                       draggable={false}
                     />
+                    {isGloveFading && (
+                      <img
+                        src={gloveImages[activeGloveIndex]}
+                        alt="Guantes Aragón"
+                        className="absolute inset-0 w-full h-full object-contain opacity-100"
+                        draggable={false}
+                      />
+                    )}
                     <button
                       type="button"
                       onClick={prevGlove}
@@ -199,6 +207,14 @@ const AragonSection = () => {
                       }`}
                       draggable={false}
                     />
+                    {isMaskFading && (
+                      <img
+                        src={maskImages[activeMaskIndex]}
+                        alt="Caretas Aragón"
+                        className="absolute inset-0 w-full h-full object-contain opacity-100"
+                        draggable={false}
+                      />
+                    )}
                     <button
                       type="button"
                       onClick={prevMask}
@@ -266,6 +282,14 @@ const AragonSection = () => {
                       }`}
                       draggable={false}
                     />
+                    {isGloveFading && (
+                      <img
+                        src={gloveImages[activeGloveIndex]}
+                        alt="Guantes Aragón"
+                        className="absolute inset-0 w-full h-full object-contain opacity-100"
+                        draggable={false}
+                      />
+                    )}
                     <button
                       type="button"
                       onClick={prevGlove}
@@ -313,6 +337,14 @@ const AragonSection = () => {
                       }`}
                       draggable={false}
                     />
+                    {isMaskFading && (
+                      <img
+                        src={maskImages[activeMaskIndex]}
+                        alt="Caretas Aragón"
+                        className="absolute inset-0 w-full h-full object-contain opacity-100"
+                        draggable={false}
+                      />
+                    )}
                     <button
                       type="button"
                       onClick={prevMask}
@@ -369,7 +401,7 @@ const AragonSection = () => {
             ))}
           </div>
           <button
-            onClick={() => scrollTo("contacto")}
+            onClick={() => scrollTo("galeria-aragon")}
             className="reveal font-display font-bold text-[0.9rem] tracking-[0.2em] uppercase bg-electric text-foreground border-none py-[18px] px-11 clip-skew hover:bg-electric-hover hover:-translate-y-0.5 transition-all"
           >
             Ver Colección Aragón

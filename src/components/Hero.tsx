@@ -9,6 +9,11 @@ const Hero = () => {
     document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
   };
 
+  const scrollToForm = () => {
+    const el = document.getElementById("contacto-form") ?? document.getElementById("contacto");
+    el?.scrollIntoView({ behavior: "smooth" });
+  };
+
   const media = useMemo<HeroMedia[]>(
     () => [
       { type: "video", src: "/videosparring.mp4" },
@@ -32,7 +37,7 @@ const Hero = () => {
   }, [media.length]);
 
   return (
-    <section id="hero" className="min-h-screen relative flex items-start md:items-center overflow-hidden">
+    <section id="hero" className="min-h-[92vh] md:min-h-screen relative flex items-start md:items-center overflow-hidden">
       {/* Background layers */}
       <div className="absolute inset-0">
         {media.map((m, i) => {
@@ -93,7 +98,7 @@ const Hero = () => {
       <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-transparent via-electric to-transparent" />
 
       {/* Content */}
-      <div className="relative z-10 px-6 md:px-[60px] max-w-[900px] pt-6 md:pt-20">
+      <div className="relative z-10 px-6 md:px-[60px] max-w-[900px] pt-24 md:pt-20">
         <p
           className="font-display font-semibold text-[0.8rem] tracking-[0.35em] uppercase text-electric mb-4 md:mb-6 opacity-0 animate-fade-up"
           style={{ animationDelay: "0.3s" }}
@@ -124,7 +129,7 @@ const Hero = () => {
           style={{ animationDelay: "0.9s" }}
         >
           <button
-            onClick={() => scrollTo("contacto")}
+            onClick={scrollToForm}
             className="font-display font-bold text-[0.9rem] tracking-[0.2em] uppercase bg-electric text-foreground border-none py-[18px] px-11 clip-skew hover:bg-electric-hover hover:-translate-y-0.5 transition-all inline-block"
           >
             Empieza Ahora

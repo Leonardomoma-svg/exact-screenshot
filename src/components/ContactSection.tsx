@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Facebook, Instagram, Music, Youtube } from "lucide-react";
+import { Facebook, Instagram, Youtube } from "lucide-react";
 
 const ContactSection = () => {
   const [formData, setFormData] = useState({
@@ -75,7 +75,14 @@ const ContactSection = () => {
               className="w-11 h-11 bg-secondary border border-primary/20 flex items-center justify-center no-underline text-grey clip-skew-sm hover:bg-electric hover:text-foreground hover:border-electric transition-all"
               aria-label="TikTok"
             >
-              <Music className="h-5 w-5" />
+              <svg
+                viewBox="0 0 48 48"
+                className="h-5 w-5"
+                fill="currentColor"
+                aria-hidden="true"
+              >
+                <path d="M33.7 6c.6 5 4.2 9 9.1 9.8V21c-3.3 0-6.3-1.1-8.7-2.9v13.2c0 7-5.7 12.7-12.7 12.7S8.7 38.3 8.7 31.3c0-7 5.7-12.7 12.7-12.7.7 0 1.4.1 2.1.2v5.6c-.7-.2-1.4-.4-2.1-.4-3.9 0-7 3.1-7 7s3.1 7 7 7 7-3.1 7-7V6h5.3z" />
+              </svg>
             </a>
           </div>
 
@@ -86,7 +93,7 @@ const ContactSection = () => {
         </div>
 
         {/* Form */}
-        <div className="bg-navy-2 p-[60px] md:p-[100px_60px]">
+        <div id="contacto-form" className="bg-navy-2 p-[60px] md:p-[100px_60px]">
           <div className="font-display font-semibold text-[0.75rem] tracking-[0.35em] uppercase text-electric mb-4 flex items-center gap-3">
             <span className="w-6 h-0.5 bg-electric" />
             Clase de Prueba

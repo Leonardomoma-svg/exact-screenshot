@@ -35,7 +35,7 @@ const EventsSection = () => {
   }, [eventImages.length]);
 
   return (
-    <section id="eventos" className="bg-background py-[100px] px-6 md:px-[60px]" ref={ref}>
+    <section id="eventos" className="bg-background py-[70px] md:py-[100px] px-6 md:px-[60px]" ref={ref}>
       <div className="max-w-[1100px] mx-auto">
         <div className="reveal font-display font-semibold text-[0.75rem] tracking-[0.35em] uppercase text-electric mb-4 flex items-center gap-3">
           <span className="w-6 h-0.5 bg-electric" />

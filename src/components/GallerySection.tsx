@@ -64,6 +64,7 @@ const GallerySection = () => {
         {items.map((item, i) => (
           <div
             key={item.label}
+            id={i === 0 ? "galeria-aragon" : undefined}
             className={`overflow-hidden relative group ${i === 0 ? "md:row-span-2 col-span-2 md:col-span-1" : ""}`}
             onMouseEnter={i === 0 ? () => setIsAragonHovered(true) : undefined}
             onMouseLeave={i === 0 ? () => setIsAragonHovered(false) : undefined}
