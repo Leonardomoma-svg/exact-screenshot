@@ -19,7 +19,7 @@ const Hero = () => {
       { type: "video", src: "/videosparring.mp4" },
       { type: "image", src: "/fotocorner.jpg" },
       { type: "image", src: "/466735289_18063462832823411_3009361582022820811_n.jpg" },
-      { type: "image", src: "/j.jpg" },
+      { type: "image", src: "/hhh.jpg" },
     ],
     [],
   );
