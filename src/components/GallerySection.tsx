@@ -24,10 +24,9 @@ const GallerySection = () => {
 
   const items = [
     { label: "Aragón", span: true },
-    { label: "Área de Bolsas" },
-    { label: "Nuestros Campeones" },
-    { label: "Pad Work" },
-    { label: "Sesión de Sparring" },
+    { label: "Manopleo", span: true },
+    { label: "Zona de costales" },
+    { label: "Sparring" },
   ];
 
   useEffect(() => {
@@ -65,7 +64,13 @@ const GallerySection = () => {
           <div
             key={item.label}
             id={i === 0 ? "galeria-aragon" : undefined}
-            className={`overflow-hidden relative group ${i === 0 ? "md:row-span-2 col-span-2 md:col-span-1" : ""}`}
+            className={`overflow-hidden relative group ${
+              i === 0
+                ? "md:row-span-2 col-span-2 md:col-span-1"
+                : i === 1
+                  ? "md:row-span-2"
+                  : ""
+            }`}
             onMouseEnter={i === 0 ? () => setIsAragonHovered(true) : undefined}
             onMouseLeave={i === 0 ? () => setIsAragonHovered(false) : undefined}
             onClick={
@@ -81,6 +86,28 @@ const GallerySection = () => {
                 className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105 filter grayscale contrast-[1.1] group-hover:grayscale-[30%]"
                 loading="lazy"
               />
+            ) : i === 1 ? (
+              <div className="absolute inset-0 grid grid-rows-2">
+                <div className="relative overflow-hidden">
+                  <video
+                    className="absolute inset-0 h-full w-full object-cover md:filter md:grayscale md:contrast-[1.1] md:group-hover:grayscale-0 transition-[filter] duration-300"
+                    controls
+                    playsInline
+                    preload="metadata"
+                  >
+                    <source src="/Video-Dany.MOV" type="video/quicktime" />
+                  </video>
+                </div>
+                <div className="relative overflow-hidden">
+                  <img
+                    src="/IMG_0691.jpg"
+                    alt="Manopleo"
+                    className="absolute inset-0 h-full w-full object-cover md:filter md:grayscale md:contrast-[1.1] md:group-hover:grayscale-0 transition-[filter] duration-300"
+                    loading="lazy"
+                    draggable={false}
+                  />
+                </div>
+              </div>
             ) : (
               <div className="w-full h-full bg-white" />
             )}

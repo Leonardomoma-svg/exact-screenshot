@@ -45,7 +45,7 @@ export const FAQ_ITEMS: FaqItem[] = [
     key: "contacto",
     label: "Contacto",
     answer:
-      "📲 WhatsApp:\n- +52 81 8083 6450",
+      "📲 WhatsApp:\n+52 81 8083 6450",
   },
   {
     key: "clase_gratis",

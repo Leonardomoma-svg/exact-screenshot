@@ -48,20 +48,20 @@ const EventsSection = () => {
         </h2>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 items-stretch">
-          <div className="reveal bg-navy-2 border border-white/10 overflow-hidden flex items-center justify-center p-4">
-            <div className="relative w-full max-w-[340px] sm:max-w-[380px] lg:max-w-[420px] aspect-[9/16]">
+          <div className="reveal bg-navy-2/40 border border-white/10 overflow-hidden flex items-center justify-center p-2 sm:p-3">
+            <div className="relative w-full max-w-[380px] lg:max-w-[460px] aspect-[9/16]">
               <img
                 src={eventImages[activeImageIndex]}
                 alt="Box para Todos vol.2"
-                className="absolute inset-0 w-full h-full object-contain sm:object-cover bg-black"
+                className="absolute inset-0 w-full h-full object-cover bg-black"
                 draggable={false}
                 loading="lazy"
               />
             </div>
           </div>
 
-          <div className="reveal bg-navy-2 border border-white/10 overflow-hidden flex items-center justify-center p-4">
-            <div className="relative w-full max-w-[340px] sm:max-w-[380px] lg:max-w-[420px] aspect-[9/16]">
+          <div className="reveal bg-navy-2/40 border border-white/10 overflow-hidden flex items-center justify-center p-2 sm:p-3">
+            <div className="relative w-full max-w-[380px] lg:max-w-[460px] aspect-[9/16]">
               {isVideoPlaying ? (
                 <iframe
                   src={fbEmbedSrc}
@@ -74,10 +74,18 @@ const EventsSection = () => {
                 <button
                   type="button"
                   onClick={() => setIsVideoPlaying(true)}
-                  className="absolute inset-0 w-full h-full flex items-center justify-center bg-black/30 hover:bg-black/40 transition-colors"
+                  className="absolute inset-0 w-full h-full flex items-center justify-center"
                   aria-label="Reproducir video"
                 >
-                  <div className="h-16 w-16 rounded-full bg-white/15 border border-white/25 flex items-center justify-center text-white text-[2rem] leading-none">
+                  <img
+                    src={eventImages[0]}
+                    alt="Preview video"
+                    className="absolute inset-0 w-full h-full object-cover bg-black"
+                    draggable={false}
+                    loading="lazy"
+                  />
+                  <div className="absolute inset-0 bg-black/30 hover:bg-black/40 transition-colors" />
+                  <div className="relative h-16 w-16 rounded-full bg-white/15 border border-white/25 flex items-center justify-center text-white text-[2rem] leading-none">
                     ▶
                   </div>
                 </button>

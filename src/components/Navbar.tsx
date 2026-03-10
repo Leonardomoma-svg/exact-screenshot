@@ -17,6 +17,12 @@ const Navbar = () => {
     setMobileOpen(false);
   };
 
+  const scrollToForm = () => {
+    const el = document.getElementById("contacto-form") ?? document.getElementById("contacto");
+    el?.scrollIntoView({ behavior: "smooth" });
+    setMobileOpen(false);
+  };
+
   const links = [
     { label: "Clases", id: "clases" },
     { label: "Horarios", id: "horarios" },
@@ -133,7 +139,7 @@ const Navbar = () => {
       </a>
 
       <button
-        onClick={() => scrollTo("contacto")}
+        onClick={scrollToForm}
         className="hidden lg:block font-display font-bold text-[0.85rem] tracking-[0.2em] uppercase bg-electric text-foreground border-none py-3 px-7 clip-skew-sm hover:bg-electric-hover hover:-translate-y-px transition-all mr-[-18px]"
       >
         Clase Gratis
@@ -178,7 +184,7 @@ const Navbar = () => {
 
               <button
                 type="button"
-                onClick={() => scrollTo("contacto")}
+                onClick={scrollToForm}
                 className="w-full text-left rounded-xl border px-4 py-3 font-display font-black tracking-[0.18em] uppercase text-[0.85rem] transition-colors bg-electric border-electric text-foreground"
               >
                 Clase Gratis

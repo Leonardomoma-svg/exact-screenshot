@@ -1,13 +1,66 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { Facebook, Instagram } from "lucide-react";
 
 const ContactSection = () => {
+  const formspreeEndpoint = useMemo(
+    () => (import.meta as any).env?.VITE_FORMSPREE_ENDPOINT as string | undefined,
+    [],
+  );
+
   const [formData, setFormData] = useState({
     nombre: "", apellido: "", telefono: "", email: "", mensaje: "",
   });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const [submitState, setSubmitState] = useState<"idle" | "sending" | "success" | "error">("idle");
+  const [submitError, setSubmitError] = useState<string | null>(null);
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (submitState === "sending") return;
+
+    setSubmitError(null);
+    setSubmitState("sending");
+
+    if (!formspreeEndpoint) {
+      setSubmitError("Falta configurar el endpoint del formulario.");
+      setSubmitState("error");
+      return;
+    }
+
+    if (!formData.nombre.trim() || !formData.apellido.trim() || !formData.telefono.trim() || !formData.email.trim()) {
+      setSubmitError("Por favor completa nombre, apellido, teléfono y email.");
+      setSubmitState("error");
+      return;
+    }
+
+    try {
+      const res = await fetch(formspreeEndpoint, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify({
+          nombre: formData.nombre,
+          apellido: formData.apellido,
+          telefono: formData.telefono,
+          email: formData.email,
+          mensaje: formData.mensaje,
+        }),
+      });
+
+      if (!res.ok) {
+        setSubmitError("No se pudo enviar. Intenta de nuevo en un momento.");
+        setSubmitState("error");
+        return;
+      }
+
+      setSubmitState("success");
+      setFormData({ nombre: "", apellido: "", telefono: "", email: "", mensaje: "" });
+    } catch {
+      setSubmitError("No se pudo enviar. Revisa tu conexión e intenta de nuevo.");
+      setSubmitState("error");
+    }
   };
 
   return (
@@ -157,10 +210,22 @@ const ContactSection = () => {
             </div>
             <button
               type="submit"
-              className="mt-2 font-display font-bold text-[0.9rem] tracking-[0.2em] uppercase bg-electric text-foreground border-none py-[18px] px-[50px] clip-skew hover:bg-electric-hover hover:-translate-y-0.5 transition-all"
+              className="mt-2 font-display font-bold text-[0.9rem] tracking-[0.2em] uppercase bg-electric text-foreground border-none py-[18px] px-[50px] clip-skew hover:bg-electric-hover hover:-translate-y-0.5 transition-all disabled:opacity-60 disabled:pointer-events-none"
+              disabled={submitState === "sending"}
             >
-              Reservar Clase Gratis →
+              {submitState === "sending" ? "Enviando…" : "Reservar Clase Gratis →"}
             </button>
+
+            {submitState === "success" && (
+              <div className="mt-4 text-[0.9rem] text-electric">
+                ¡Listo! Recibimos tu información.
+              </div>
+            )}
+            {submitState === "error" && (
+              <div className="mt-4 text-[0.9rem] text-red-400">
+                {submitError ?? "Ocurrió un error al enviar."}
+              </div>
+            )}
           </form>
         </div>
       </section>
