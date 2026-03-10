@@ -152,14 +152,14 @@ const AragonSection = () => {
                       }`}
                       draggable={false}
                     />
-                    {isGloveFading && (
-                      <img
-                        src={gloveImages[activeGloveIndex]}
-                        alt="Guantes Aragón"
-                        className="absolute inset-0 w-full h-full object-contain opacity-100"
-                        draggable={false}
-                      />
-                    )}
+                    <img
+                      src={gloveImages[activeGloveIndex]}
+                      alt="Guantes Aragón"
+                      className={`absolute inset-0 w-full h-full object-contain transition-opacity duration-300 ${
+                        isGloveFading ? "opacity-100" : "opacity-0"
+                      }`}
+                      draggable={false}
+                    />
                     <button
                       type="button"
                       onClick={prevGlove}
@@ -207,14 +207,14 @@ const AragonSection = () => {
                       }`}
                       draggable={false}
                     />
-                    {isMaskFading && (
-                      <img
-                        src={maskImages[activeMaskIndex]}
-                        alt="Caretas Aragón"
-                        className="absolute inset-0 w-full h-full object-contain opacity-100"
-                        draggable={false}
-                      />
-                    )}
+                    <img
+                      src={maskImages[activeMaskIndex]}
+                      alt="Caretas Aragón"
+                      className={`absolute inset-0 w-full h-full object-contain transition-opacity duration-300 ${
+                        isMaskFading ? "opacity-100" : "opacity-0"
+                      }`}
+                      draggable={false}
+                    />
                     <button
                       type="button"
                       onClick={prevMask}
@@ -282,14 +282,14 @@ const AragonSection = () => {
                       }`}
                       draggable={false}
                     />
-                    {isGloveFading && (
-                      <img
-                        src={gloveImages[activeGloveIndex]}
-                        alt="Guantes Aragón"
-                        className="absolute inset-0 w-full h-full object-contain opacity-100"
-                        draggable={false}
-                      />
-                    )}
+                    <img
+                      src={gloveImages[activeGloveIndex]}
+                      alt="Guantes Aragón"
+                      className={`absolute inset-0 w-full h-full object-contain transition-opacity duration-300 ${
+                        isGloveFading ? "opacity-100" : "opacity-0"
+                      }`}
+                      draggable={false}
+                    />
                     <button
                       type="button"
                       onClick={prevGlove}
@@ -337,14 +337,14 @@ const AragonSection = () => {
                       }`}
                       draggable={false}
                     />
-                    {isMaskFading && (
-                      <img
-                        src={maskImages[activeMaskIndex]}
-                        alt="Caretas Aragón"
-                        className="absolute inset-0 w-full h-full object-contain opacity-100"
-                        draggable={false}
-                      />
-                    )}
+                    <img
+                      src={maskImages[activeMaskIndex]}
+                      alt="Caretas Aragón"
+                      className={`absolute inset-0 w-full h-full object-contain transition-opacity duration-300 ${
+                        isMaskFading ? "opacity-100" : "opacity-0"
+                      }`}
+                      draggable={false}
+                    />
                     <button
                       type="button"
                       onClick={prevMask}

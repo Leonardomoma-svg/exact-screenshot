@@ -15,13 +15,11 @@ const StatsBar = () => {
   const stats = [
     { num: "12", suffix: "+", label: "Años formando campeones" },
     { num: "400", suffix: "+", label: "Miembros activos" },
-    { num: "38", suffix: "", label: "Campeones regionales" },
-    { num: "6", suffix: "", label: "Entrenadores certificados" },
   ];
 
   return (
     <div ref={ref} className="reveal bg-secondary border-y border-primary/20 py-10 px-6 md:px-[60px]">
-      <div className="grid grid-cols-2 md:grid-cols-4">
+      <div className="grid grid-cols-2 md:grid-cols-2">
         {stats.map((stat, i) => (
           <div
             key={stat.label}

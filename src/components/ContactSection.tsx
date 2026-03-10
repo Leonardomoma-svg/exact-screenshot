@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Facebook, Instagram, Youtube } from "lucide-react";
+import { Facebook, Instagram } from "lucide-react";
 
 const ContactSection = () => {
   const [formData, setFormData] = useState({
@@ -50,29 +50,28 @@ const ContactSection = () => {
           </div>
           <div className="flex gap-4">
             <a
-              href="#"
-              className="w-11 h-11 bg-secondary border border-primary/20 flex items-center justify-center no-underline text-grey clip-skew-sm hover:bg-electric hover:text-foreground hover:border-electric transition-all"
+              href="https://www.instagram.com/cornerboxmty/"
+              target="_blank"
+              rel="noreferrer"
+              className="w-11 h-11 bg-secondary border border-primary/20 flex items-center justify-center no-underline text-grey clip-skew-sm hover:bg-[#E1306C] hover:text-white hover:border-[#E1306C] transition-all"
               aria-label="Instagram"
             >
               <Instagram className="h-5 w-5" />
             </a>
             <a
-              href="#"
-              className="w-11 h-11 bg-secondary border border-primary/20 flex items-center justify-center no-underline text-grey clip-skew-sm hover:bg-electric hover:text-foreground hover:border-electric transition-all"
+              href="https://www.facebook.com/bluecornerboxmty"
+              target="_blank"
+              rel="noreferrer"
+              className="w-11 h-11 bg-secondary border border-primary/20 flex items-center justify-center no-underline text-grey clip-skew-sm hover:bg-[#1877F2] hover:text-white hover:border-[#1877F2] transition-all"
               aria-label="Facebook"
             >
               <Facebook className="h-5 w-5" />
             </a>
             <a
-              href="#"
-              className="w-11 h-11 bg-secondary border border-primary/20 flex items-center justify-center no-underline text-grey clip-skew-sm hover:bg-electric hover:text-foreground hover:border-electric transition-all"
-              aria-label="YouTube"
-            >
-              <Youtube className="h-5 w-5" />
-            </a>
-            <a
-              href="#"
-              className="w-11 h-11 bg-secondary border border-primary/20 flex items-center justify-center no-underline text-grey clip-skew-sm hover:bg-electric hover:text-foreground hover:border-electric transition-all"
+              href="https://www.tiktok.com/@cornerboxingclub?_r=1&_t=ZS-94ZWEproyDH"
+              target="_blank"
+              rel="noreferrer"
+              className="w-11 h-11 bg-secondary border border-primary/20 flex items-center justify-center no-underline text-grey clip-skew-sm hover:bg-black hover:text-white hover:border-black transition-all"
               aria-label="TikTok"
             >
               <svg

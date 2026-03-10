@@ -39,7 +39,7 @@ const ClassesSection = () => {
               key={cls.num}
               type="button"
               onClick={() => setMobileActive(i)}
-              className={`shrink-0 rounded-xl border px-3 py-3 font-display font-black text-[0.66rem] tracking-[0.18em] uppercase leading-tight transition-colors ${
+              className={`shrink-0 rounded-xl border px-3 py-3 font-display font-black text-[0.62rem] tracking-[0.16em] uppercase leading-tight transition-colors ${
                 mobileActive === i
                   ? "bg-secondary border-electric text-foreground"
                   : "bg-navy-3 border-primary/10 text-grey"
