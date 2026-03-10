@@ -4,6 +4,8 @@ const GallerySection = () => {
   const ref = useRef<HTMLDivElement>(null);
   const [activeAragonIndex, setActiveAragonIndex] = useState(0);
   const [isAragonHovered, setIsAragonHovered] = useState(false);
+  const [activeManopleoIndex, setActiveManopleoIndex] = useState<0 | 1>(0);
+  const manopleoVideoRef = useRef<HTMLVideoElement | null>(null);
 
   const aragonActionImages = useMemo(
     () => [
@@ -47,6 +49,18 @@ const GallerySection = () => {
     return () => window.clearInterval(id);
   }, [aragonActionImages.length, isAragonHovered]);
 
+  useEffect(() => {
+    if (activeManopleoIndex !== 0) return;
+    const id = window.setTimeout(() => {
+      manopleoVideoRef.current
+        ?.play()
+        .catch(() => {
+          // autoplay can be blocked; user can tap play
+        });
+    }, 50);
+    return () => window.clearTimeout(id);
+  }, [activeManopleoIndex]);
+
   return (
     <section id="galeria" className="bg-background py-[70px] md:py-[100px] px-0" ref={ref}>
       <div className="px-6 md:px-[60px] mb-8 md:mb-[50px]">
@@ -87,18 +101,26 @@ const GallerySection = () => {
                 loading="lazy"
               />
             ) : i === 1 ? (
-              <div className="absolute inset-0 grid grid-rows-2">
-                <div className="relative overflow-hidden">
+              <div
+                className="absolute inset-0"
+                onClick={() => {
+                  if (activeManopleoIndex === 1) setActiveManopleoIndex(0);
+                }}
+              >
+                {activeManopleoIndex === 0 ? (
                   <video
+                    ref={manopleoVideoRef}
                     className="absolute inset-0 h-full w-full object-cover md:filter md:grayscale md:contrast-[1.1] md:group-hover:grayscale-0 transition-[filter] duration-300"
-                    controls
+                    autoPlay
+                    muted
                     playsInline
                     preload="metadata"
+                    onEnded={() => setActiveManopleoIndex(1)}
+                    controls
                   >
                     <source src="/Video-Dany.MOV" />
                   </video>
-                </div>
-                <div className="relative overflow-hidden">
+                ) : (
                   <img
                     src="/IMG_0691.jpg"
                     alt="Manopleo"
@@ -106,7 +128,7 @@ const GallerySection = () => {
                     loading="lazy"
                     draggable={false}
                   />
-                </div>
+                )}
               </div>
             ) : (
               <div className="w-full h-full bg-white" />
