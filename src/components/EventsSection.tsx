@@ -2,15 +2,9 @@ import { useEffect, useMemo, useRef, useState } from "react";
 
 const EventsSection = () => {
   const ref = useRef<HTMLDivElement>(null);
-  const [activeImageIndex, setActiveImageIndex] = useState(0);
   const [isVideoPlaying, setIsVideoPlaying] = useState(false);
 
-  const eventImages = useMemo(
-    () => [
-      "/jjj.jpg",
-    ],
-    [],
-  );
+  const videoPreviewImage = useMemo(() => "/jjj.jpg", []);
 
   const fbReelUrl = "https://www.facebook.com/reel/1507497720297763";
   const fbEmbedSrc = `https://www.facebook.com/plugins/video.php?href=${encodeURIComponent(
@@ -26,14 +20,6 @@ const EventsSection = () => {
     return () => observer.disconnect();
   }, []);
 
-  useEffect(() => {
-    if (eventImages.length <= 1) return;
-    const id = window.setInterval(() => {
-      setActiveImageIndex((i) => (i + 1) % eventImages.length);
-    }, 3500);
-    return () => window.clearInterval(id);
-  }, [eventImages.length]);
-
   return (
     <section id="eventos" className="bg-background py-[70px] md:py-[100px] px-6 md:px-[60px]" ref={ref}>
       <div className="max-w-[1100px] mx-auto">
@@ -47,21 +33,9 @@ const EventsSection = () => {
           <em className="italic text-stroke not-italic">vol.2</em>
         </h2>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 items-stretch">
-          <div className="reveal bg-navy-2/40 border border-white/10 overflow-hidden flex items-center justify-center p-2 sm:p-3">
-            <div className="relative w-full max-w-[380px] lg:max-w-[460px] aspect-[9/16]">
-              <img
-                src={eventImages[activeImageIndex]}
-                alt="Box para Todos vol.2"
-                className="absolute inset-0 w-full h-full object-cover bg-black"
-                draggable={false}
-                loading="lazy"
-              />
-            </div>
-          </div>
-
-          <div className="reveal bg-navy-2/40 border border-white/10 overflow-hidden flex items-center justify-center p-2 sm:p-3">
-            <div className="relative w-full max-w-[380px] lg:max-w-[460px] aspect-[9/16]">
+        <div className="flex justify-center">
+          <div className="reveal bg-navy-2/40 border border-white/10 overflow-hidden flex items-center justify-center p-2 sm:p-3 w-full max-w-[520px]">
+            <div className="relative w-full aspect-[9/16]">
               {isVideoPlaying ? (
                 <iframe
                   src={fbEmbedSrc}
@@ -78,7 +52,7 @@ const EventsSection = () => {
                   aria-label="Reproducir video"
                 >
                   <img
-                    src={eventImages[0]}
+                    src={videoPreviewImage}
                     alt="Preview video"
                     className="absolute inset-0 w-full h-full object-cover bg-black"
                     draggable={false}

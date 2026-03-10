@@ -95,7 +95,7 @@ const GallerySection = () => {
                     playsInline
                     preload="metadata"
                   >
-                    <source src="/Video-Dany.MOV" type="video/quicktime" />
+                    <source src="/Video-Dany.MOV" />
                   </video>
                 </div>
                 <div className="relative overflow-hidden">
@@ -118,7 +118,7 @@ const GallerySection = () => {
                 </div>
               </div>
             )}
-            <div className="absolute inset-0 bg-gradient-to-t from-background/90 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
+            <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-background/90 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
               <span className="font-display font-bold text-base uppercase tracking-[0.15em] text-foreground">{item.label}</span>
             </div>
           </div>
