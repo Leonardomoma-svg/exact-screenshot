@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Facebook, Instagram } from "lucide-react";
 
 const ContactSection = () => {
@@ -13,6 +13,15 @@ const ContactSection = () => {
 
   const [submitState, setSubmitState] = useState<"idle" | "sending" | "success" | "error">("idle");
   const [submitError, setSubmitError] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (submitState !== "success" && submitState !== "error") return;
+    const t = window.setTimeout(() => {
+      setSubmitState("idle");
+      setSubmitError(null);
+    }, submitState === "success" ? 5000 : 6500);
+    return () => window.clearTimeout(t);
+  }, [submitState]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -220,14 +229,45 @@ const ContactSection = () => {
               {submitState === "sending" ? "Enviando…" : "Reservar Clase Gratis →"}
             </button>
 
+            {submitState === "sending" && (
+              <div className="mt-4 flex items-center gap-3">
+                <div className="h-5 w-5 rounded-full border-2 border-electric/30 border-t-electric animate-spin" />
+                <div className="text-[0.9rem] text-grey">
+                  Enviando tu info…
+                </div>
+              </div>
+            )}
+
             {submitState === "success" && (
-              <div className="mt-4 text-[0.9rem] text-electric">
-                ¡Listo! Recibimos tu información.
+              <div className="mt-5 rounded-2xl border border-electric/35 bg-electric/10 px-4 py-4">
+                <div className="flex items-start gap-3">
+                  <div className="h-9 w-9 rounded-xl bg-electric/20 border border-electric/25 flex items-center justify-center">
+                    <svg viewBox="0 0 24 24" className="h-5 w-5 text-electric" fill="none" aria-hidden="true">
+                      <path d="M20 6L9 17l-5-5" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" />
+                    </svg>
+                  </div>
+                  <div className="flex-1">
+                    <div className="font-display font-black tracking-[0.18em] uppercase text-[0.75rem] text-electric">
+                      Enviado
+                    </div>
+                    <div className="mt-1 text-[0.95rem] text-foreground/90">
+                      ¡Listo! Recibimos tu información. En breve te contactamos.
+                    </div>
+                  </div>
+                </div>
+                <div className="mt-3 h-1.5 w-full rounded-full bg-white/10 overflow-hidden">
+                  <div className="h-full w-full bg-electric origin-left animate-[progress_5s_linear_forwards]" />
+                </div>
               </div>
             )}
             {submitState === "error" && (
-              <div className="mt-4 text-[0.9rem] text-red-400">
-                {submitError ?? "Ocurrió un error al enviar."}
+              <div className="mt-5 rounded-2xl border border-red-500/25 bg-red-500/10 px-4 py-4">
+                <div className="font-display font-black tracking-[0.18em] uppercase text-[0.75rem] text-red-300">
+                  Error
+                </div>
+                <div className="mt-1 text-[0.95rem] text-red-200/90">
+                  {submitError ?? "Ocurrió un error al enviar."}
+                </div>
               </div>
             )}
           </form>

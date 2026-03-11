@@ -6,6 +6,9 @@ const GallerySection = () => {
   const [isAragonHovered, setIsAragonHovered] = useState(false);
   const [activeManopleoIndex, setActiveManopleoIndex] = useState<0 | 1>(0);
   const manopleoVideoRef = useRef<HTMLVideoElement | null>(null);
+  const [isManopleoHovered, setIsManopleoHovered] = useState(false);
+  const manopleoTimerRef = useRef<number | null>(null);
+  const [canHover, setCanHover] = useState(false);
 
   const aragonActionImages = useMemo(
     () => [
@@ -41,6 +44,15 @@ const GallerySection = () => {
   }, []);
 
   useEffect(() => {
+    const mq = window.matchMedia?.("(hover: hover)");
+    if (!mq) return;
+    const update = () => setCanHover(Boolean(mq.matches));
+    update();
+    mq.addEventListener?.("change", update);
+    return () => mq.removeEventListener?.("change", update);
+  }, []);
+
+  useEffect(() => {
     if (!isAragonHovered) return;
     if (aragonActionImages.length <= 1) return;
     const id = window.setInterval(() => {
@@ -49,17 +61,54 @@ const GallerySection = () => {
     return () => window.clearInterval(id);
   }, [aragonActionImages.length, isAragonHovered]);
 
+  const effectiveHovered = canHover ? isManopleoHovered : true;
+
+  useEffect(() => {
+    if (manopleoTimerRef.current) {
+      window.clearTimeout(manopleoTimerRef.current);
+      manopleoTimerRef.current = null;
+    }
+
+    if (activeManopleoIndex === 0) {
+      const v = manopleoVideoRef.current;
+      if (v) {
+        if (!effectiveHovered) {
+          v.pause();
+          v.currentTime = 0;
+        } else {
+          if (v.currentTime >= (v.duration || Number.POSITIVE_INFINITY) - 0.15) v.currentTime = 0;
+          v.play().catch(() => null);
+        }
+      }
+
+      if (effectiveHovered) {
+        manopleoTimerRef.current = window.setTimeout(() => {
+          setActiveManopleoIndex(1);
+        }, 17000);
+      }
+    } else {
+      if (effectiveHovered) {
+        manopleoTimerRef.current = window.setTimeout(() => {
+          setActiveManopleoIndex(0);
+        }, 2200);
+      }
+    }
+
+    return () => {
+      if (manopleoTimerRef.current) {
+        window.clearTimeout(manopleoTimerRef.current);
+        manopleoTimerRef.current = null;
+      }
+    };
+  }, [activeManopleoIndex, effectiveHovered]);
+
   useEffect(() => {
     if (activeManopleoIndex !== 0) return;
-    const id = window.setTimeout(() => {
-      manopleoVideoRef.current
-        ?.play()
-        .catch(() => {
-          // autoplay can be blocked; user can tap play
-        });
-    }, 50);
-    return () => window.clearTimeout(id);
-  }, [activeManopleoIndex]);
+    const v = manopleoVideoRef.current;
+    if (!v) return;
+    v.currentTime = 0;
+    if (effectiveHovered) v.play().catch(() => null);
+  }, [activeManopleoIndex, effectiveHovered]);
 
   return (
     <section id="galeria" className="bg-background py-[70px] md:py-[100px] px-0" ref={ref}>
@@ -103,6 +152,8 @@ const GallerySection = () => {
             ) : i === 1 ? (
               <div
                 className="absolute inset-0"
+                onMouseEnter={() => setIsManopleoHovered(true)}
+                onMouseLeave={() => setIsManopleoHovered(false)}
                 onClick={() => {
                   if (activeManopleoIndex === 1) setActiveManopleoIndex(0);
                 }}
@@ -111,12 +162,10 @@ const GallerySection = () => {
                   <video
                     ref={manopleoVideoRef}
                     className="absolute inset-0 h-full w-full object-cover md:filter md:grayscale md:contrast-[1.1] md:group-hover:grayscale-0 transition-[filter] duration-300"
-                    autoPlay
                     muted
+                    loop
                     playsInline
                     preload="metadata"
-                    onEnded={() => setActiveManopleoIndex(1)}
-                    controls
                   >
                     <source src="/Video-Dany.MOV" />
                   </video>
