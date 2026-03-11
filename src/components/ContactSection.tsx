@@ -34,23 +34,27 @@ const ContactSection = () => {
     }
 
     try {
+      const fd = new FormData();
+      fd.append("nombre", formData.nombre);
+      fd.append("apellido", formData.apellido);
+      fd.append("telefono", formData.telefono);
+      fd.append("email", formData.email);
+      fd.append("mensaje", formData.mensaje);
+
       const res = await fetch(formspreeEndpoint, {
         method: "POST",
         headers: {
-          "Content-Type": "application/json",
           Accept: "application/json",
         },
-        body: JSON.stringify({
-          nombre: formData.nombre,
-          apellido: formData.apellido,
-          telefono: formData.telefono,
-          email: formData.email,
-          mensaje: formData.mensaje,
-        }),
+        body: fd,
       });
 
       if (!res.ok) {
-        setSubmitError("No se pudo enviar. Intenta de nuevo en un momento.");
+        const msg = await res
+          .json()
+          .then((j) => (typeof j?.error === "string" ? j.error : null))
+          .catch(() => null);
+        setSubmitError(msg ?? "No se pudo enviar. Intenta de nuevo en un momento.");
         setSubmitState("error");
         return;
       }

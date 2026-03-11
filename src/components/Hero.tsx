@@ -118,14 +118,14 @@ const Hero = () => {
         </h1>
 
         <p
-          className="text-base md:text-lg text-grey max-w-[460px] leading-relaxed mt-12 md:mt-8 mb-10 md:mb-12 opacity-0 animate-fade-up"
+          className="text-base md:text-lg text-grey max-w-[460px] leading-relaxed mt-16 md:mt-8 mb-10 md:mb-12 opacity-0 animate-fade-up"
           style={{ animationDelay: "0.7s" }}
         >
           Entrenamiento de alto rendimiento para todos los niveles. Técnica, disciplina y la mentalidad de un campeón.
         </p>
 
         <div
-          className="flex gap-5 items-center opacity-0 animate-fade-up mt-3 md:mt-0"
+          className="flex gap-5 items-center opacity-0 animate-fade-up mt-8 md:mt-0"
           style={{ animationDelay: "0.9s" }}
         >
           <button

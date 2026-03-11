@@ -116,14 +116,36 @@ const Navbar = () => {
         ))}
       </ul>
 
-      <button
-        type="button"
-        onClick={() => setMobileOpen((v) => !v)}
-        aria-label={mobileOpen ? "Cerrar menú" : "Abrir menú"}
-        className="lg:hidden h-11 w-11 rounded-xl border border-white/15 bg-black/25 text-white flex items-center justify-center backdrop-blur-sm"
-      >
-        <span className="text-[1.35rem] leading-none">{mobileOpen ? "×" : "☰"}</span>
-      </button>
+      <div className="flex items-center gap-2 lg:contents">
+        <a
+          href="https://wa.me/528180836450"
+          target="_blank"
+          rel="noreferrer"
+          aria-label="WhatsApp 81 8083 6450"
+          className="lg:hidden inline-flex h-11 w-11 items-center justify-center rounded-xl bg-[#25D366] border border-[#25D366] text-white shadow-[0_10px_26px_rgba(0,0,0,0.35)] hover:bg-[#1EBE5A] hover:border-[#1EBE5A] transition-colors"
+        >
+          <svg viewBox="0 0 32 32" className="h-5 w-5" fill="currentColor" aria-hidden="true">
+            <path d="M19.11 17.25c-.27-.14-1.6-.79-1.85-.88-.25-.09-.43-.14-.61.14-.18.27-.7.88-.86 1.06-.16.18-.32.2-.59.07-.27-.14-1.14-.42-2.17-1.34-.8-.71-1.34-1.59-1.5-1.86-.16-.27-.02-.42.12-.56.12-.12.27-.32.41-.48.14-.16.18-.27.27-.45.09-.18.05-.34-.02-.48-.07-.14-.61-1.47-.84-2.01-.22-.53-.45-.46-.61-.47-.16-.01-.34-.01-.52-.01-.18 0-.48.07-.73.34-.25.27-.95.93-.95 2.26 0 1.33.98 2.62 1.12 2.8.14.18 1.93 2.95 4.67 4.13.65.28 1.16.45 1.55.58.65.21 1.25.18 1.72.11.52-.08 1.6-.65 1.82-1.28.23-.63.23-1.17.16-1.28-.07-.11-.25-.18-.52-.32z"/>
+            <path d="M26.67 5.33C23.85 2.51 20.09 1 16.1 1 7.99 1 1.4 7.59 1.4 15.7c0 2.59.68 5.12 1.98 7.35L1 31l8.15-2.14c2.18 1.19 4.64 1.82 7.14 1.82h.01c8.11 0 14.7-6.59 14.7-14.7 0-3.99-1.55-7.75-4.33-10.65zM16.3 28.1h-.01c-2.19 0-4.34-.59-6.21-1.71l-.45-.27-4.83 1.27 1.29-4.71-.29-.48a12.35 12.35 0 0 1-1.9-6.5C3.9 8.98 9.33 3.55 16.1 3.55c3.28 0 6.36 1.28 8.68 3.6a12.19 12.19 0 0 1 3.59 8.65c0 6.77-5.42 12.3-12.07 12.3z"/>
+          </svg>
+        </a>
+
+        <button
+          onClick={scrollToForm}
+          className="lg:hidden font-display font-black text-[0.65rem] tracking-[0.22em] uppercase bg-electric text-foreground border border-electric/60 py-2 px-3 rounded-xl hover:bg-electric-hover transition-colors"
+        >
+          Clase Gratis
+        </button>
+
+        <button
+          type="button"
+          onClick={() => setMobileOpen((v) => !v)}
+          aria-label={mobileOpen ? "Cerrar menú" : "Abrir menú"}
+          className="lg:hidden h-11 w-11 rounded-xl border border-white/15 bg-black/25 text-white flex items-center justify-center backdrop-blur-sm"
+        >
+          <span className="text-[1.35rem] leading-none">{mobileOpen ? "×" : "☰"}</span>
+        </button>
+      </div>
 
       <a
         href="https://wa.me/528180836450"

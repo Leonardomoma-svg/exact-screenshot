@@ -219,7 +219,7 @@ const ScheduleSection = () => {
               key={d}
               type="button"
               onClick={() => setMobileDayIndex(i)}
-              className={`shrink-0 rounded-xl border px-4 py-3 font-display font-black text-[0.75rem] tracking-[0.28em] uppercase transition-colors shadow-[0_10px_24px_rgba(0,0,0,0.22)] ${
+              className={`shrink-0 rounded-xl border px-3 py-2 font-display font-black text-[0.7rem] tracking-[0.28em] uppercase transition-colors shadow-[0_10px_24px_rgba(0,0,0,0.22)] ${
                 mobileDayIndex === i
                   ? "bg-secondary border-electric text-foreground"
                   : "bg-secondary/40 border-primary/10 text-foreground/75"
@@ -241,7 +241,7 @@ const ScheduleSection = () => {
               <button
                 key={`${row.time}-${mobileDayIndex}`}
                 type="button"
-                className={`w-full text-left rounded-xl border p-4 transition-colors shadow-[0_14px_34px_rgba(0,0,0,0.25)] ${
+                className={`w-full text-left rounded-xl border p-3 transition-colors shadow-[0_14px_34px_rgba(0,0,0,0.25)] ${
                   isFilled
                     ? `relative bg-secondary/70 border-primary/15 ${isKids ? "ring-1 ring-white/35" : ""}`
                     : "bg-secondary/15 border-primary/10"
@@ -258,7 +258,7 @@ const ScheduleSection = () => {
                 )}
 
                 <div className="flex items-center justify-between gap-3">
-                  <div className="font-display font-black tracking-[0.18em] text-[0.95rem] text-foreground/90">
+                  <div className="font-display font-black tracking-[0.18em] text-[0.88rem] text-foreground/90">
                     {row.time}
                   </div>
                   {isKids && (
@@ -271,17 +271,17 @@ const ScheduleSection = () => {
                 </div>
 
                 {isFilled ? (
-                  <div className={`mt-3 rounded-lg border border-primary/10 bg-gradient-to-br ${accent?.bg ?? "from-electric/20 via-secondary/85 to-secondary/70"} px-3 py-2`}
+                  <div className={`mt-2 rounded-lg border border-primary/10 bg-gradient-to-br ${accent?.bg ?? "from-electric/20 via-secondary/85 to-secondary/70"} px-3 py-2`}
                   >
                     <div className="text-[0.7rem] tracking-[0.28em] uppercase text-foreground/70 font-bold">
                       Box
                     </div>
-                    <div className={`mt-1 text-[1.05rem] font-black tracking-wide ${accent?.text ?? "text-electric"}`}>
+                    <div className={`mt-1 text-[0.98rem] font-black tracking-wide ${accent?.text ?? "text-electric"}`}>
                       {cell?.coach}
                     </div>
                   </div>
                 ) : (
-                  <div className="mt-3 text-[0.8rem] tracking-[0.22em] uppercase text-dim font-display font-black">
+                  <div className="mt-2 text-[0.8rem] tracking-[0.22em] uppercase text-dim font-display font-black">
                     —
                   </div>
                 )}

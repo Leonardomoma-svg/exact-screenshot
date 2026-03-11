@@ -47,6 +47,14 @@ const AragonSection = () => {
     [],
   );
 
+  useEffect(() => {
+    const urls = [...gloveImages, ...maskImages];
+    urls.forEach((src) => {
+      const img = new Image();
+      img.src = src;
+    });
+  }, [gloveImages, maskImages]);
+
   const [activeGloveIndex, setActiveGloveIndex] = useState(0);
   const [displayGloveIndex, setDisplayGloveIndex] = useState(0);
   const [isGloveFading, setIsGloveFading] = useState(false);
@@ -90,7 +98,7 @@ const AragonSection = () => {
     const t = window.setTimeout(() => {
       setDisplayGloveIndex(activeGloveIndex);
       setIsGloveFading(false);
-    }, 300);
+    }, 420);
     return () => window.clearTimeout(t);
   }, [activeGloveIndex, displayGloveIndex]);
 
@@ -100,7 +108,7 @@ const AragonSection = () => {
     const t = window.setTimeout(() => {
       setDisplayMaskIndex(activeMaskIndex);
       setIsMaskFading(false);
-    }, 300);
+    }, 420);
     return () => window.clearTimeout(t);
   }, [activeMaskIndex, displayMaskIndex]);
 
@@ -147,7 +155,7 @@ const AragonSection = () => {
                     <img
                       src={gloveImages[displayGloveIndex]}
                       alt="Guantes Aragón"
-                      className={`absolute inset-0 w-full h-full object-contain transition-opacity duration-300 ${
+                      className={`absolute inset-0 w-full h-full object-contain transition-opacity duration-[420ms] ${
                         isGloveFading ? "opacity-0" : "opacity-100"
                       }`}
                       draggable={false}
@@ -155,7 +163,7 @@ const AragonSection = () => {
                     <img
                       src={gloveImages[activeGloveIndex]}
                       alt="Guantes Aragón"
-                      className={`absolute inset-0 w-full h-full object-contain transition-opacity duration-300 ${
+                      className={`absolute inset-0 w-full h-full object-contain transition-opacity duration-[420ms] ${
                         isGloveFading ? "opacity-100" : "opacity-0"
                       }`}
                       draggable={false}
@@ -202,7 +210,7 @@ const AragonSection = () => {
                     <img
                       src={maskImages[displayMaskIndex]}
                       alt="Caretas Aragón"
-                      className={`absolute inset-0 w-full h-full object-contain transition-opacity duration-300 ${
+                      className={`absolute inset-0 w-full h-full object-contain transition-opacity duration-[420ms] ${
                         isMaskFading ? "opacity-0" : "opacity-100"
                       }`}
                       draggable={false}
@@ -210,7 +218,7 @@ const AragonSection = () => {
                     <img
                       src={maskImages[activeMaskIndex]}
                       alt="Caretas Aragón"
-                      className={`absolute inset-0 w-full h-full object-contain transition-opacity duration-300 ${
+                      className={`absolute inset-0 w-full h-full object-contain transition-opacity duration-[420ms] ${
                         isMaskFading ? "opacity-100" : "opacity-0"
                       }`}
                       draggable={false}
@@ -277,7 +285,7 @@ const AragonSection = () => {
                     <img
                       src={gloveImages[displayGloveIndex]}
                       alt="Guantes Aragón"
-                      className={`absolute inset-0 w-full h-full object-contain transition-opacity duration-300 ${
+                      className={`absolute inset-0 w-full h-full object-contain transition-opacity duration-[420ms] ${
                         isGloveFading ? "opacity-0" : "opacity-100"
                       }`}
                       draggable={false}
@@ -285,7 +293,7 @@ const AragonSection = () => {
                     <img
                       src={gloveImages[activeGloveIndex]}
                       alt="Guantes Aragón"
-                      className={`absolute inset-0 w-full h-full object-contain transition-opacity duration-300 ${
+                      className={`absolute inset-0 w-full h-full object-contain transition-opacity duration-[420ms] ${
                         isGloveFading ? "opacity-100" : "opacity-0"
                       }`}
                       draggable={false}
@@ -332,7 +340,7 @@ const AragonSection = () => {
                     <img
                       src={maskImages[displayMaskIndex]}
                       alt="Caretas Aragón"
-                      className={`absolute inset-0 w-full h-full object-contain transition-opacity duration-300 ${
+                      className={`absolute inset-0 w-full h-full object-contain transition-opacity duration-[420ms] ${
                         isMaskFading ? "opacity-0" : "opacity-100"
                       }`}
                       draggable={false}
@@ -340,7 +348,7 @@ const AragonSection = () => {
                     <img
                       src={maskImages[activeMaskIndex]}
                       alt="Caretas Aragón"
-                      className={`absolute inset-0 w-full h-full object-contain transition-opacity duration-300 ${
+                      className={`absolute inset-0 w-full h-full object-contain transition-opacity duration-[420ms] ${
                         isMaskFading ? "opacity-100" : "opacity-0"
                       }`}
                       draggable={false}
